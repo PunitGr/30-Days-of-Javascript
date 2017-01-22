@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>JS Reference Vs Copy</title>
+</head>
+<body>
+	<script>
+		// Strings, numbers and booleans
+		let a = 100;
+		let b = a;
+		console.log(a,b);
+		a = 200;
+		console.log(a,b);
+
+		// Array
+		const players = ['Punit', 'Mia', 'John', 'Sherlock'];
+
+		// Make a copy of the array
+		const team = players;
+		console.log(players, team);
+
+		team[0] = 'Pasta'
+		console.log(players,team); // Team refers to players which is the original array
+
+		// if you want the original array unaffected use slice(), it will have a copy of array
+		const team2 = players.slice();
+		team2[1] = 'Rosy'
+		console.log(players, team2);
+
+		// or concat in the array like this
+		const team3 = [].concat(players);
+
+		// or use ES6 spread
+		const team4 = [...players];
+
+		// The same thing goes for objects
+		const person = {
+			name: 'Punit',
+			age: '21',
+			socials: {
+				twitter: "@punitgr",
+				facebook: "@punitgr"
+			}
+		}
+
+		// and think we make a copy
+		const captain = person;
+		console.log(captain);
+		captain.number = 99;
+		console.log(captain);
+		console.log(person);
+
+		// how to take a copy then
+		const cap2 = Object.assign({}, person, { number: 100 });
+		console.log(cap2);
+		console.log(person);
+
+		// Object.assign() only goes one level deep - both for array and objects. Use cloneDeep method from lodash. or use this 
+		const dev = JSON.parse(JSON.stringify(person));
+	</script>
+</body>
+</html>
